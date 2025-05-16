@@ -14,9 +14,18 @@ import { DatabaseSetup } from "@/components/database-setup";
 import type { Project, Task } from "@/lib/supabase";
 import { useTasks, DatabaseAlert } from "@/lib/context";
 import { EditProjectForm } from "./edit-project-form";
+import { MenuIcon } from "lucide-react";
 
 export function Dashboard() {
   const t = useTranslations();
+
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  const [open, setOpen] = useState(!isMobile);
+
+  // Actualizar visibilidad cuando cambia `isMobile`
+  useEffect(() => {
+    setOpen(!isMobile);
+  }, [isMobile]);
 
   const { selectedProject, setSelectedProject } = useTasks();
 
@@ -65,12 +74,17 @@ export function Dashboard() {
 
   return (
     <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
-      <Sidebar
-        onEditProject={handleEditProject}
-        selectedProject={selectedProject}
-        setSelectedProject={setSelectedProject}
-        onNewProject={() => setShowCreateProjectForm(true)}
-      />
+      {open && (
+        <div className=" absolute top-0 left-0 h-screen w-64 bg-gray-800">
+          <Sidebar
+            setOpen={setOpen}
+            onEditProject={handleEditProject}
+            selectedProject={selectedProject}
+            setSelectedProject={setSelectedProject}
+            onNewProject={() => setShowCreateProjectForm(true)}
+          />
+        </div>
+      )}
 
       <main className="flex-1 overflow-y-auto p-4 md:p-6">
         <div className="mx-auto max-w-5xl">
@@ -78,11 +92,21 @@ export function Dashboard() {
           <DatabaseSetup />
 
           <div className="mb-8 flex items-center justify-between">
-            <h1 className="text-2xl font-bold  text-gray-900 dark:text-white">
-              {project?.name
-                ? `${t("project")}: ${project?.name}`
-                : t("all-projects")}
-            </h1>
+            <div className="flex gap-2">
+              <div>
+                <button
+                  onClick={() => setOpen((prev) => !prev)}
+                  className="md:hidden dark:bg-gray-600  p-2 bg-gray-200 rounded"
+                >
+                  <MenuIcon />
+                </button>
+              </div>
+              <h1 className="text-2xl font-bold  text-gray-900 dark:text-white">
+                {project?.name
+                  ? `${t("project")}: ${project?.name}`
+                  : t("all-projects")}
+              </h1>
+            </div>
             <button
               onClick={() => setShowTaskForm(true)}
               className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
@@ -117,4 +141,23 @@ export function Dashboard() {
       )}
     </div>
   );
+}
+
+export function useMediaQuery(query: string): boolean {
+  const [matches, setMatches] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia(query);
+
+    if (media.matches !== matches) {
+      setMatches(media.matches);
+    }
+
+    const listener = () => setMatches(media.matches);
+    media.addEventListener("change", listener);
+
+    return () => media.removeEventListener("change", listener);
+  }, [query, matches]);
+
+  return matches;
 }

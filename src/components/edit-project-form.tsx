@@ -20,7 +20,6 @@ import { useTranslations } from "next-intl";
 import { createFieldNameTyped } from "@/lib";
 import { FormInput } from "./formik/FormInput";
 
-// import { useTasks } from "@/lib/context";
 import { updateProject, type Project } from "@/lib/supabase";
 import { useProjectSchema } from "@/schemas";
 import { toast } from "sonner";

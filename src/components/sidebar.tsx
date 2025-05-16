@@ -8,6 +8,7 @@ import {
   ChevronDown,
   ChevronRight,
   MoreVertical,
+  MenuIcon,
 } from "lucide-react";
 
 import {
@@ -30,6 +31,7 @@ interface Props {
   setSelectedProject: (project: string) => void;
   onNewProject: () => void;
   onEditProject: (projectId: string) => void;
+  setOpen: (value: boolean | ((prev: boolean) => boolean)) => void;
 }
 
 export function Sidebar({
@@ -37,6 +39,7 @@ export function Sidebar({
   setSelectedProject,
   onNewProject,
   onEditProject,
+  setOpen,
 }: Props) {
   const t = useTranslations();
 
@@ -62,14 +65,21 @@ export function Sidebar({
   };
 
   return (
-    <div className="w-64  shrink-0 border-r border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-700">
-      <div className="flex h-16 items-center border-b border-gray-200 px-4 dark:border-gray-800">
+    <div className="w-64 shrink-0 border-r h-full border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-700">
+      <div className="flex gap-2 h-16 items-center border-b border-gray-200 px-4 dark:border-gray-800">
+        <button
+          onClick={() => setOpen((prev) => !prev)}
+          className="md:hidden dark:bg-gray-600  p-2 bg-gray-200 rounded"
+        >
+          <MenuIcon />
+        </button>
+
         <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
           {t("title")}
         </h2>
       </div>
 
-      <div className="p-4  flex flex-col justify-between h-11/12">
+      <div className="p-4 h-11/12  flex flex-col justify-between ">
         <div>
           <button
             onClick={() => setSelectedProject("Todos")}
