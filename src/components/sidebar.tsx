@@ -197,11 +197,11 @@ export function Sidebar({
                 </div>
               ))}
 
-              {projects.length === 0 && (
+              {/* {projects.length === 0 && (
                 <div className="py-2 text-sm text-gray-500 dark:text-gray-400">
                   {t("no-projects")}
                 </div>
-              )}
+              )} */}
             </div>
           </div>
         </div>
