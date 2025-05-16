@@ -69,7 +69,7 @@ export function Sidebar({
       <div className="flex gap-2 h-16 items-center border-b border-gray-200 px-4 dark:border-gray-800">
         <button
           onClick={() => setOpen((prev) => !prev)}
-          className="md:hidden dark:bg-gray-600  p-2 bg-gray-200 rounded"
+          className={` dark:bg-gray-600  p-2 bg-gray-200 rounded`}
         >
           <MenuIcon />
         </button>

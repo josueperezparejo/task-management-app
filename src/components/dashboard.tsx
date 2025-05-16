@@ -75,7 +75,11 @@ export function Dashboard() {
   return (
     <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
       {open && (
-        <div className=" absolute top-0 left-0 h-screen w-64 bg-gray-800">
+        <div
+          className={`h-screen w-64 bg-gray-800 ${
+            isMobile ? "absolute top-0 left-0" : "relative"
+          }`}
+        >
           <Sidebar
             setOpen={setOpen}
             onEditProject={handleEditProject}
@@ -96,7 +100,9 @@ export function Dashboard() {
               <div>
                 <button
                   onClick={() => setOpen((prev) => !prev)}
-                  className="md:hidden dark:bg-gray-600  p-2 bg-gray-200 rounded"
+                  className={`${
+                    open ? "hidden" : ""
+                  } dark:bg-gray-600  p-2 bg-gray-200 rounded`}
                 >
                   <MenuIcon />
                 </button>
