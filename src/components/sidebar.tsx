@@ -153,56 +153,6 @@ export function Sidebar({
                 )}
               </div>
             )}
-
-            <div className="ml-2 space-y-1">
-              {projects.map((project) => (
-                <div
-                  key={project.id}
-                  className={`flex items-center justify-between rounded-md px-3 py-2 text-sm ${
-                    selectedProject === project.id
-                      ? "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-100"
-                      : "text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
-                  }`}
-                >
-                  <button
-                    className="flex-1 text-left capitalize"
-                    onClick={() => setSelectedProject(project.id)}
-                  >
-                    {project.name}
-                  </button>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <button className="rounded-md p-1 hover:bg-gray-200 dark:hover:bg-gray-700">
-                        <MoreVertical className="h-4 w-4" />
-                      </button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuItem
-                        onClick={(event) => {
-                          event.stopPropagation();
-                          event.preventDefault();
-                          onEditProject(project.id);
-                        }}
-                      >
-                        {t("rename")}
-                      </DropdownMenuItem>
-                      <DropdownMenuItem
-                        className="text-red-600 dark:text-red-400"
-                        onClick={() => handleDeleteProject(project.id)}
-                      >
-                        {t("delete")}
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </div>
-              ))}
-
-              {/* {projects.length === 0 && (
-                <div className="py-2 text-sm text-gray-500 dark:text-gray-400">
-                  {t("no-projects")}
-                </div>
-              )} */}
-            </div>
           </div>
         </div>
 
