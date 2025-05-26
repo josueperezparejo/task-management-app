@@ -51,9 +51,12 @@
   "no-tasks-description": "Start by creating a new task for this project.",
 
   "title-required": "Title is required",
+  "title-max-length": "Title must be at most 50 characters",
   "description-required": "Description is required",
+  "description-max-length": "Description must be at most 500 characters",
   "due-date-required": "Due date is required",
   "priority-required": "Priority is required",
   "project-id-required": "Project is required",
-  "name-required": "Name is required"
+  "name-required": "Name is required",
+  "name-max-length": "Project name must be at most 30 characters"
 }

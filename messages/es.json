@@ -50,10 +50,13 @@
   "no-tasks": "Sin tareas",
   "no-tasks-description": "Comienza creando una nueva tarea para este proyecto.",
 
-  "title-required": "El título es obligatorio",
-  "description-required": "La descripción es obligatoria",
+  "title-required": "El título es requerido",
+  "title-max-length": "El título debe tener máximo 50 caracteres",
+  "description-required": "La descripción es requerida",
+  "description-max-length": "La descripción debe tener máximo 500 caracteres",
   "due-date-required": "La fecha de vencimiento es obligatoria",
   "priority-required": "La prioridad es obligatoria",
   "project-id-required": "El proyecto es obligatorio",
-  "name-required": "El nombre es obligatorio"
+  "name-required": "El nombre es obligatorio",
+  "name-max-length": "El nombre del proyecto debe tener máximo 30 caracteres"
 }

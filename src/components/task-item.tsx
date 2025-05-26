@@ -12,6 +12,12 @@ import { updateTaskStatus, deleteTask, type Task } from "@/lib/supabase";
 import { useTasks } from "@/lib/context";
 import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
 
 const formatDate = (dateString?: string) => {
   const locale = useLocale();
@@ -148,15 +154,28 @@ export function TaskItem({ task, onEdit }: { task: Task; onEdit: () => void }) {
           </div>
 
           {task.description && (
-            <p
-              className={`mt-1 text-sm ${
-                isCompleted
-                  ? "text-gray-500 dark:text-gray-400"
-                  : "text-gray-600 dark:text-gray-300"
-              }`}
-            >
-              {task.description}
-            </p>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <p
+                    className={`mt-1 text-sm w-64 truncate ${
+                      isCompleted
+                        ? "text-gray-500 dark:text-gray-400"
+                        : "text-gray-600 dark:text-gray-300"
+                    }`}
+                  >
+                    {task.description.length > 100
+                      ? `${task.description.slice(0, 100)}...`
+                      : task.description}
+                  </p>
+                </TooltipTrigger>
+                <TooltipContent className="max-w-[300px] p-3">
+                  <div className="whitespace-pre-wrap break-words">
+                    {task.description}
+                  </div>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           )}
         </div>
       </div>
